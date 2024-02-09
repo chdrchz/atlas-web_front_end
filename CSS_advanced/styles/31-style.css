@@ -403,6 +403,8 @@
 	--header-logo-link-position: absolute;
 	--header-logo-link-top: -1rem;
 	--header-logo-link-left: 0;
+    --transition-duration: .3s;
+	--transition-cubic-bezier: cubic-bezier(0.17, 0.67, 0, 1.01);
 }
 
 [data-section-theme="dark"] {
@@ -468,9 +470,7 @@ h1, h2, h3, h4, h5, h6 {
   
 .card-category {color: var(--color-primary);}
 
-.card-services .card-title {
-    margin: 0;
-}
+.card-services .card-title {margin: 0;}
 
 .card-services a {
 	display: block;
@@ -484,9 +484,7 @@ h1, h2, h3, h4, h5, h6 {
 	text-decoration: none;
 }
 
-.card-testimonial {
-	text-align: center;
-}
+.card-testimonial {text-align: center;}
 
 .card-testimonial .card-avatar {
 	border-radius: 50%;
@@ -494,8 +492,12 @@ h1, h2, h3, h4, h5, h6 {
 	height: 10rem;
 }
 
-.card-testimonial .card-quote {
-	position: relative;
+.card-testimonial .card-quote {position: relative;}
+
+.card-testimonial .card-quote cite {
+	display: block;
+	padding-top: 1rem;
+	color: var(--color-primary);
 }
 
 .card-testimonial .card-quote::before {
@@ -508,15 +510,16 @@ h1, h2, h3, h4, h5, h6 {
 	z-index: -1;
 }
 
-.card-testimonial .card-quote cite {
-	display: block;
-	padding-top: 1rem;
-	color: var(--color-primary);
-}
-
 .card-work .card-outer {
 	position: relative;
 	overflow: hidden;
+}
+
+.card-work:hover .card-outer {transform: scale(0.95);}
+
+.card-work:hover .card-image {
+	transform: scale(1.2);
+	transition: var(--transition-duration) var(--transition-cubic-bezier);
 }
 
 .card-work .card-image img {
@@ -532,11 +535,10 @@ h1, h2, h3, h4, h5, h6 {
 	left: -0.1rem;
 	right: -0.1rem;
 	z-index: 1;
+	transition: var(--transition-duration) var(--transition-cubic-bezier);
 }
 
-.card-work:hover .card-inner {
-	background-color: rgba(0, 0, 0, 0.7);
-}
+.card-work:hover .card-inner {background-color: rgba(0, 0, 0, 0.7);}
 
 .card-work .card-title {
 	text-align: center;
@@ -561,9 +563,7 @@ h1, h2, h3, h4, h5, h6 {
 	content: "";
 }
 
-.card-work:hover .card-title {
-	opacity: 1;
-}
+.card-work:hover .card-title {opacity: 1;}
 
 .button {
 	display: var(--button-display);
