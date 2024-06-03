@@ -1,0 +1,16 @@
+/* 2 SASS VARS TO CHANGE COLOR OF TEXT AND BACKGROUND */
+$text-color: #3D3D3D;
+$background-color: #6D6D6D;
+
+body {
+    color: $text-color;
+    background-color: $background-color;
+}
+
+p {
+    color: $text-color;
+}
+
+h2 {
+    background-color: $background-color;
+}
