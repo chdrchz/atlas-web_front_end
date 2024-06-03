@@ -1,0 +1,18 @@
+/* USING MIXINS */
+@mixin margin-10() {
+margin-right: 10px;
+margin-left: 10px;
+}
+
+@mixin margin-15() {
+margin-right: 15px;
+margin-left: 15px;
+}
+
+body {
+    @include margin-10();
+}
+
+div {
+    @include margin-15();
+}
