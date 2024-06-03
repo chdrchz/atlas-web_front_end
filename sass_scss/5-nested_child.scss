@@ -1,0 +1,10 @@
+/* SASS STYLING, CUSTOM VARS, NESTING */
+$text-color-1: #3D3D3D;
+$text-color-2: #FF0000;
+
+body {
+    color: $text-color-1;
+    .red:first-child {
+        color: $text-color-2;
+    }
+}
