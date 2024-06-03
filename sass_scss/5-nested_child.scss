@@ -4,7 +4,7 @@ $text-color-2: #FF0000;
 
 body {
     color: $text-color-1;
-    .red:first-child {
+    &:first-child {
         color: $text-color-2;
     }
 }
