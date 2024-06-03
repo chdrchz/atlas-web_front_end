@@ -1,9 +1,8 @@
-/* SASS STYLING, CUSTOM VARS, NESTING */
-$text-color-1: #FF0000;
-$hover-color: #00FF00;
+/* SASS STYLING + NESTING HOVER */
 button {
-    color: $text-color-1;
-    button:hover {
-        color: $hover-color;
+    color: #FF0000;
+    
+    &:hover {
+        color: #00FF00;
     }
 }
