@@ -380,7 +380,8 @@
   }
 
   /* Section ABOUT US ============================= */
-  .section-about-us .col-1-3 {
+
+  .section-about-us [class*='col-'] {
     align-self: center;
   }
 
