@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Task 0</title>
+
+    <!-- Load the latest version of jQuery using their CDN -->
+    <script
+        src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+        crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+    <script>
+        $(document).ready(function () {
+            createFamilyTree();
+            createForm();
+        });
+
+        function createFamilyTree() {
+            // Create table
+            $('body').append('<table></table>');
+            $('table').append('<thead></thead>');
+            $('thead').append('<tr></tr>');
+            $('thead tr').append('<th>Firstname</th><th>Lastname</th>');
+
+            // Append an empty tbody
+            $('table').append('<tbody></tbody>');
+        }
+
+        function addNewMember(firstName, lastName, position) {
+
+            // If position is before, prepend, if after, append 
+            if (position == 'before') {
+                $('tbody').prepend(`<tr><td>${firstName}</td><td>${lastName}</td><td>(x)</td></tr>`);
+            } else {
+                $('tbody').append(`<tr><td>${firstName}</td><td>${lastName}</td><td>(x)</td></tr>`);
+            }
+
+            // Change the 3rd cell to orange and remove it on click
+            $('tbody tr:last td:nth-child(3)').css('background-color', 'orange').click(function() {
+                $(this).closest('tr').remove();
+            });
+        }
+
+        function createForm() {
+            $('table').before(`<form>
+                                    <input type="text"><input type="text">
+                                    <select>
+                                        <option value="before">Before</option>
+                                        <option value="after">After</option>
+                                    </select>
+                                    <input type="button" id="submit" value="Submit">
+                                </form>`);
+
+            $('#submit').click(function () {
+				addNewMember($('input:first').val(),
+					$('input:nth-of-type(2)').val(),
+					$('select').find(":selected").text().toLowerCase());
+			});
+        };
+    </script>
+</body>
+
+</html>
