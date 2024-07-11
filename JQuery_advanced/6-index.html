@@ -39,11 +39,6 @@
             } else {
                 $('tbody').append(`<tr><td>${firstName}</td><td>${lastName}</td><td>(x)</td></tr>`);
             }
-
-            // Change the 3rd cell to orange and remove it on click
-            $('tbody tr:last td:nth-child(3)').css('background-color', 'orange').click(function() {
-                $(this).closest('tr').remove();
-            });
         }
 
         function createForm() {
