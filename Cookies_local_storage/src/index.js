@@ -19,52 +19,30 @@ function setCookies() {
   var firstNameValue = $("#firstname").val();
   var emailValue = $("#email").val();
 
-  // Expiration date
-  var expirationDate = new Date();
-  expirationDate.setDate(expirationDate.getDate() + 30); // Expires in 30 days
-  var expires = "expires=" + expirationDate.toUTCString() + "; path=/";
-
-  // Set or overwrite cookies
+  // Set or overwrite cookies with js-cookie
   if (firstNameValue) {
-    document.cookie = "firstname=" + encodeURIComponent(firstNameValue) + "; " + expires;
-  } else {
-    console.log("No value entered in the firstname input field.");
+    Cookies.set('firstname', firstNameValue, { expires: 30 }); // Expires in 30 days
   }
 
   if (emailValue) {
-    document.cookie = "email=" + encodeURIComponent(emailValue) + "; " + expires;
-  } else {
-    console.log("No value entered in the email input field.");
+    Cookies.set('email', emailValue, { expires: 30 }); // Expires in 30 days
   }
 }
 
 // Retrieves cookies
 function getCookie(name) {
-  var cookies = document.cookie.split(';'); // Splits cookies into an array
+  return Cookies.get(name);
+}
 
-  // Iterate over array and decode the cookie
-  for (var i = 0; i < cookies.length; i++) {
-
-    // Trim whitespace and split name= and name. ie: name=Savanna will be 'firstname', 'savanna'
-    var cookiePair = cookies[i].trim().split('=');
-
-    // If the key equals name, then decode the corresponding value to get yo cookie
-    if (decodeURIComponent(cookiePair[0]) === name) {
-      return decodeURIComponent(cookiePair[1]);
-    }
-  }
-  // No cookie was found, return empty string
-  return "";
+// Deletes cookies
+function deleteCookies() {
+  Cookies.remove('firstname');
+  Cookies.remove('email');
 }
 
 // Deletes old cookies and shows form - ie, the user has logged out
 function deleteCookiesAndShowForm() {
-  // "remove" the firstname cookie
-  document.cookie = "firstname=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-
-  // "remove" the email cookie
-  document.cookie = "email=; expires=Thur, 01 Jan 1970 00:00:00 UTC; path=/";
-
+  deleteCookies();
   showForm();
 }
 
@@ -73,7 +51,7 @@ function showWelcomeMessageOrForm() {
   var whoIsLoggedIn = getCookie("firstname");
 
   // Meaning NO ONE is logged in
-  if (whoIsLoggedIn === "") {
+  if (whoIsLoggedIn === "" || !whoIsLoggedIn) {
     showForm();
   } else {
     hideForm();
