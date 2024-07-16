@@ -39,13 +39,16 @@ function addItemToCart(item) {
 
 // Creates a store with available items 
 function createStore(availableItems) {
-    $("body").append("<ul></ul>");
+    $("body").append(`<ul class="unorderedList"></ul>`);
     for (let i = 0; i < availableItems.length; i++) {
-        const listItem = `<li class="availableItem">${availableItems[i]}</li>`;
-        $("ul").append(listItem);
-        $("listItem").on("click", addItemToCart($(this).text()));
+      const listItem = `<li class="availableItem">${availableItems[i]}</li>`;
+      $("ul").append(listItem);
+      $("ul li").on('click', function(){
+        const clickedItem = $(this).text(); 
+        addItemToCart(clickedItem); 
+      });
     }
-}
+  }
 
 // Displays a cart
 function displayCart() {
