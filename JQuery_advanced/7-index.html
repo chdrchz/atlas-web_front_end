@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Task 0</title>
+
+    <!-- Load the latest version of jQuery using their CDN -->
+    <script
+        src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+        integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+        crossorigin="anonymous">
+    </script>
+</head>
+
+<body>
+    <script>
+        $(document).ready(function () {
+            createSearchForm();
+        });
+
+        // common elements
+
+        function createSearchForm() {
+
+            // create input fields
+            var form = $('<form>');
+            var listItem = $('<li>');
+            var inputText = $('<input type="text">');
+            var inputSubmit = $('<input type="submit">');
+
+            // on submit
+            $('form').submit(function(event) {
+                event.preventDefault(); // make sure form is not submitted before you're ready
+                queryWikipedia(inputText.val());
+            })
+
+            // append elements
+            $('body').append(form);
+            $('form').append(inputText, inputSubmit);
+            $('form').after(listItem);
+        }
+
+        function addNewArticle(id, title, snippet) {
+            var titleParagraph = $('<p>').append(`<span>${id} -</span><b>${title}</b>`);
+            var snippetParagraph = $('<p>').text(`${snippet}`);
+            var paragraphElements = titleParagraph + snippetParagraph;
+
+            // append to li created by createSearchForm()
+            $('listItem').append(paragraphElements);
+        }
+
+        function queryWikipedia(search) {
+            let urlSearch="https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=" + search;
+        }
+
+        $.ajax({
+            type: "GET",
+            url: urlSearch,
+            dataType: 'jsonp',
+            success: function(data) {
+
+                // find the data
+                let responseData = data.query.search;
+
+                // for each response, create an article
+                responseData.forEach(function(response) {
+                    addNewArticle(response.padeid, response.title, response.snippet);
+                });
+            },
+            error: function(error) {
+                console.log('And error has occured');
+            }
+        })
+    </script>
+</body>
+
+</html>
